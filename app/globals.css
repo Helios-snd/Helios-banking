@@ -160,6 +160,7 @@
 
   .profile-banner {
     @apply h-[120px] w-full bg-gradient-mesh bg-cover bg-no-repeat;
+    
   }
 
   .profile {
@@ -379,4 +380,10 @@
   .sidebar-label {
     @apply text-16 font-semibold text-black-2 max-xl:hidden;
   }
+}
+.open-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 1;
 }
