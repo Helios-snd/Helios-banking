@@ -23,6 +23,7 @@ import { authFormSchema } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
+import PlaidLink from './PlaidLink'
 
 const formSchema = z.object({
     email: z.string().email(),
@@ -58,23 +59,23 @@ const onSubmit = async (data: z.infer<typeof formSchema>) => {
   try {
    console.log(data);
    // setIsLoading(false)
-   // Sign up with Appwrite & create a plaid token
+   // Sign up with Appwrite & create a plaid token if 
+   if(type === 'sign-up'){
 
-   if (type === 'sign-up') {
-    // const userData ={
-    //   // firstName: data.firstName,
-    //   // lastName: data.lastName,
-    //   // address1: data.address1,
-    //   // city: data.city,
-    //   // state: data.state,
-    //   // postalCode: data.postalCode,
-    //   // dateOfBirth: data.dateOfBirth,
-    //   // panNumber: data.panNumber
-      
+   const userData ={
+    firstName: data.firstName!,
+    lastName: data.firstName!,
+    address1: data.address1!,
+    city: data.city!,
+    state: data.state!,
+    postalCode: data.postalCode!,
+    dateOfBirth: data.dateOfBirth!,
+    panNumber: data.panNumber! ,
+    email: data.email,  
+    password: data.password,
+   }
 
-    // }
-
-    const newUser = await signUp(data);
+    const newUser = await signUp(userData);
     setUser(newUser)
    }
    if (type === 'sign-in') {
@@ -132,11 +133,12 @@ const onSubmit = async (data: z.infer<typeof formSchema>) => {
             </h1>
           </div>
         </header>
-        {user 
-        ? (<div className='flex flex-col gap-4'>
-            {/* Plaid Link Component */}
-        </div>)
-        :   <>
+        {/* {user ? ( */}
+          <div className='flex flex-col gap-4'>
+            <PlaidLink user={user} variant="primary" />
+        </div>
+        {/* ):  (  */}
+  <>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {/* <FormField
@@ -247,7 +249,7 @@ name='password' label="Password" placeholder='Enter your password'
           type ==='sign-in'
           ?"Don't have an account?"
           :"Already have an account?"
-          }            
+           }            
           </p>
          <Link  href={type === 'sign-in' ? '/sign-up':'/sign-in'} className='form-link'>
          {type === 'sign-in' ? 'Sign Up':'Sign In'}
@@ -255,7 +257,7 @@ name='password' label="Password" placeholder='Enter your password'
          </footer>
 
             </>
-            }
+            {/* } */}
     </section>
   )
 }
