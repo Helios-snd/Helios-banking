@@ -1,5 +1,6 @@
 import MobileNav from "@/components/ui/MobileNav";
 import Sidebar from "@/components/ui/Sidebar";
+import { getAccounts } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
 import Image from "next/image";
 import { redirect, useRouter } from "next/navigation";
@@ -16,7 +17,7 @@ export default async function RootLayout({
  if(!loggedIn){
   redirect('/sign-in')
  }
- 
+ const accounts = await getAccounts({ userId: loggedIn.$id})
  return (
     <main  className="flex h-screen w-full, font-inter">
      <Sidebar user = {loggedIn} />

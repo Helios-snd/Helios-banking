@@ -70,7 +70,7 @@ const onSubmit = async (data: z.infer<typeof formSchema>) => {
     state: data.state!,
     postalCode: data.postalCode!,
     dateOfBirth: data.dateOfBirth!,
-    panNumber: data.panNumber! ,
+    ssn: data.ssn! ,
     email: data.email,  
     password: data.password,
    }
@@ -133,11 +133,11 @@ const onSubmit = async (data: z.infer<typeof formSchema>) => {
             </h1>
           </div>
         </header>
-        {/* {user ? ( */}
+         {user ? ( 
           <div className='flex flex-col gap-4'>
             <PlaidLink user={user} variant="primary" />
         </div>
-        {/* ):  (  */}
+        ):  (  
   <>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -206,7 +206,7 @@ const onSubmit = async (data: z.infer<typeof formSchema>) => {
 
           <CustomInput
           control={form.control}
-          name='panNumber' label='Pan Number' placeholder='ex: AFZPK7190K'
+          name='ssn' label='Pan Number' placeholder='ex: AFZPK7190K'
           />         
        </div>
 
@@ -257,9 +257,10 @@ name='password' label="Password" placeholder='Enter your password'
          </footer>
 
             </>
-            {/* } */}
+            )} 
     </section>
   )
 }
 
 export default AuthForm
+
